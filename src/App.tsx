@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPosts } from './handlers/api';
 import Loading from './shared/Loading';
 import Error from './shared/Error';
+import Posts from './components/Posts';
+import Scroller from './components/Scroller';
 
 function App() {
   const { data, isLoading, error } = useQuery({
@@ -27,19 +29,12 @@ function App() {
           </h1>
         </header>
         <section className="my-8 px-4 md:px-12">
-          <div className="gap-5 grid grid-cols-1">
-            {data?.map((post: any) => (
-              <div
-                key={post.id}
-                className="shadow-sm mb-4 p-4 border border-gray-300 rounded-lg"
-              >
-                <h2 className="mb-2 font-semibold text-lg uppercase">
-                  {post.title}
-                </h2>
-                <p className="text-gray-700 uppercase">{post.body}</p>
-              </div>
-            ))}
-          </div>
+          <h2 className="mb-4 font-semibold text-lg uppercase">
+            5 Million Posts
+          </h2>
+          <Scroller />
+          <h2 className="mt-4 mb-4 font-semibold text-lg uppercase">Posts</h2>
+          <Posts PostsData={data} />
         </section>
       </main>
     </>
